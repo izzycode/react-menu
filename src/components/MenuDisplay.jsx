@@ -8,15 +8,15 @@ export default class MenuDisplay extends Component {
   }
 
   buildMenu = () => {
-    let menu = [this.state.menuItems]
+    let menu = this.state.menuItems
     return (
-      menu.map((elem) => {
-        return "hello"
+      menu.map( elem => {
+        return <MenuItem key={ elem.name } values={ elem } />
       })
     )
   }
 
-  handleMenu = ev => {
+  componentDidMount = () => {
     fetch("https://gist.githubusercontent.com/izzycode/cddcac1643c8e932128eecc5ad94878c/raw/96b2aafa1ff601efb71830dafebcc038293e4c43/appetizers.json")
       .then(res => res.json())
       .then(data => {
@@ -24,17 +24,13 @@ export default class MenuDisplay extends Component {
       })
   }
 
-
-
-
-
   render(){
     return(
       <div>
-        <h1> MenuItem</h1>
-        {this.handleMenu()}
+        {
+          this.buildMenu()
+        }
       </div>
-
     )
   }
 }
